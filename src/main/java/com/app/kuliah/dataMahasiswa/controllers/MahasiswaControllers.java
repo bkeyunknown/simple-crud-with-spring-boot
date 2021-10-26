@@ -30,8 +30,8 @@ public class MahasiswaControllers {
     }
 
     @GetMapping(value = "deleteMahasiswa")
-    public String deleteMahasiswa(@RequestParam int id) {
-        mahasiswaService.deleteMahasiswa(id);
+    public String deleteMahasiswaById(@RequestParam int id) {
+        mahasiswaService.deleteMahasiswaById(id);
         return "Delete Mahasiswa id: "+id+" Success";
     }
 }

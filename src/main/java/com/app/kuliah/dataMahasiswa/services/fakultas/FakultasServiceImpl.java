@@ -29,7 +29,7 @@ public class FakultasServiceImpl implements FakultasService{
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteFakultasById(int id) {
         fakultasRepository.deleteById(id);
     }
 }

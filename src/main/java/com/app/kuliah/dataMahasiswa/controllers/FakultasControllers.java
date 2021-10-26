@@ -33,8 +33,8 @@ public class FakultasControllers {
     }
 
     @GetMapping(value = "deleteFakultas")
-    public String deleteFakultas(@RequestParam int id) {
-        fakultasService.deleteById(id);
+    public String deleteFakultasById(@RequestParam int id) {
+        fakultasService.deleteFakultasById(id);
         return "Delete Fakultas id: "+id+" Success";
     }
 }

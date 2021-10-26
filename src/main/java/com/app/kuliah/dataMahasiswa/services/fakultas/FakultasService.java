@@ -14,5 +14,5 @@ public interface FakultasService {
 
     FakultasEntity updateFakultas(FakultasEntity param);
 
-    void deleteById(int id);
+    void deleteFakultasById(int id);
 }

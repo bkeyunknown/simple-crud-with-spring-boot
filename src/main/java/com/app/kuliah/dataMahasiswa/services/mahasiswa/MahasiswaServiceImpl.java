@@ -29,7 +29,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
     }
 
     @Override
-    public void deleteMahasiswa(int id) {
+    public void deleteMahasiswaById(int id) {
         mahasiswaRepository.deleteById(id);
     }
 }

@@ -30,7 +30,7 @@ public class JurusanControllers {
     }
 
     @GetMapping(value = "deleteJurusan")
-    public String deleteJurusan(@RequestParam int id) {
+    public String deleteJurusanById(@RequestParam int id) {
         jurusanService.deleteJurusanById(id);
         return "Delete Jurusan id: "+id+" Success";
     }

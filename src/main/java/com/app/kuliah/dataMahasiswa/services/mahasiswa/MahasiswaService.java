@@ -14,5 +14,5 @@ public interface MahasiswaService {
 
     MahasiswaEntity updateMahasiswa(MahasiswaEntity param);
 
-    void deleteMahasiswa(int id);
+    void deleteMahasiswaById(int id);
 }
