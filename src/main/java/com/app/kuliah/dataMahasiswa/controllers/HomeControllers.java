@@ -22,6 +22,11 @@ public class HomeControllers {
     @Autowired
     MatkulControllers matkulControllers;
 
+    @GetMapping("/")
+    public String index() {
+        return "home_page";
+    }
+
     @GetMapping("/mahasiswa")
     public String mahasiswa(Model model) {
         model.addAttribute("mahasiswa", mahasiswaControllers.getAllMahasiswa());
