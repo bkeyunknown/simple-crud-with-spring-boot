@@ -3,33 +3,45 @@ package com.app.kuliah.dataMahasiswa.controllers;
 import com.app.kuliah.dataMahasiswa.entities.MahasiswaEntity;
 import com.app.kuliah.dataMahasiswa.services.mahasiswa.MahasiswaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(value = "mahasiswa")
+@Controller
+@RequestMapping("/mahasiswa")
 public class MahasiswaControllers {
 
     @Autowired
     MahasiswaService mahasiswaService;
 
-    @PostMapping(value = "addNewMahasiswa")
+    @RequestMapping("/")
+    public String index(Model model) {
+        model.addAttribute("mahasiswa", getAllMahasiswa());
+        return "mahasiswa_page";
+    }
+
+    @PostMapping("/addNewMahasiswa")
+    @ResponseBody
     public MahasiswaEntity addNewMahasiswa(@RequestBody MahasiswaEntity param) {
         return mahasiswaService.addNew(param);
     }
 
-    @GetMapping(value = "getAllMahasiswa")
+    @GetMapping("/getAllMahasiswa")
+    @ResponseBody
     public List<MahasiswaEntity> getAllMahasiswa() {
         return mahasiswaService.getAllMahasiswa();
     }
 
-    @PostMapping(value = "updateMahasiswa")
+    @PostMapping("/updateMahasiswa")
+    @ResponseBody
     public MahasiswaEntity updateMahasiswa(@RequestBody MahasiswaEntity param) {
         return mahasiswaService.updateMahasiswa(param);
     }
 
-    @GetMapping(value = "deleteMahasiswa")
+    @DeleteMapping("/deleteMahasiswa")
+    @ResponseBody
     public String deleteMahasiswaById(@RequestParam int id) {
         mahasiswaService.deleteMahasiswaById(id);
         return "Delete Mahasiswa id: "+id+" Success";
