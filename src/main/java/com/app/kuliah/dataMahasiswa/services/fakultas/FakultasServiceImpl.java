@@ -32,4 +32,9 @@ public class FakultasServiceImpl implements FakultasService{
     public void deleteFakultasById(int id) {
         fakultasRepository.deleteById(id);
     }
+
+    @Override
+    public FakultasEntity findFakultasById(int id) {
+        return fakultasRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 }

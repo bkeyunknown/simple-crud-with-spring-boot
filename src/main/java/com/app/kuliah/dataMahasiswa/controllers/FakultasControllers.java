@@ -3,50 +3,49 @@ package com.app.kuliah.dataMahasiswa.controllers;
 import com.app.kuliah.dataMahasiswa.entities.FakultasEntity;
 import com.app.kuliah.dataMahasiswa.services.fakultas.FakultasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/fakultas")
 public class FakultasControllers {
 
     @Autowired
     FakultasService fakultasService;
 
-    @RequestMapping("/")
-    public String index(Model model) {
-        model.addAttribute("fakultas", getAllFakultas());
-        return "fakultas_page";
-    }
+//    @RequestMapping("/")
+//    public String index(Model model) {
+//        model.addAttribute("fakultas", getAllFakultas());
+//        return "fakultas_page";
+//    }
 
     @PostMapping("/addNewFakultas")
-    @ResponseBody
-    public FakultasEntity addNewFakultas(@RequestBody FakultasEntity param) {
+    public ResponseEntity<FakultasEntity> addNewFakultas(@RequestBody FakultasEntity param) {
         FakultasEntity fakultas = fakultasService.addFakultas(param);
-        return fakultas;
+        return new ResponseEntity<>(fakultas, HttpStatus.CREATED);
     }
 
     @GetMapping("/getAllFakultas")
-    @ResponseBody
     public List<FakultasEntity> getAllFakultas() {
-        List<FakultasEntity> fakultasList = fakultasService.getAllFakultas();
-        return fakultasList;
+        return fakultasService.getAllFakultas();
     }
 
     @PostMapping("/updateFakultas")
-    @ResponseBody
-    public FakultasEntity updateFakultas(@RequestBody FakultasEntity param){
+    public ResponseEntity<FakultasEntity> updateFakultas(@RequestBody FakultasEntity param){
         FakultasEntity fakultas = fakultasService.updateFakultas(param);
-        return fakultas;
+        return new ResponseEntity<>(fakultas, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteFakultas")
-    @ResponseBody
-    public String deleteFakultasById(@RequestParam int id) {
+    @DeleteMapping("/deleteFakultas/{id}")
+    public ResponseEntity<FakultasEntity> deleteFakultasById(@PathVariable("id") int id) {
+        FakultasEntity deleteFakultas = fakultasService.findFakultasById(id);
         fakultasService.deleteFakultasById(id);
-        return "Delete Fakultas id: "+id+" Success";
+//        return "Delete Fakultas id: "+id+" Success";
+        return new ResponseEntity<>(deleteFakultas, HttpStatus.OK);
     }
 }
