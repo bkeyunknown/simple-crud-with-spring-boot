@@ -5,10 +5,10 @@
 - Jurusan
 - Mata Kuliah
 
-# How to install
+# How to run
 1. Clone repository ```git clone https://github.com/bkeyunknown/spring_data_mahasiswa.git```
-2. Open terminal/cmd, install with maven ```mvn clean install``` (already installed maven)
-3. Start Spring Boot ```mvn spring-boot:run```
+2. Start Spring Boot ```mvn spring-boot:run```
+3. Enjoy
 
 # Documentation
 - API Documentation with Postman
