@@ -5,8 +5,6 @@ import com.app.kuliah.dataMahasiswa.services.mahasiswa.MahasiswaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,32 +16,34 @@ public class MahasiswaControllers {
     @Autowired
     MahasiswaService mahasiswaService;
 
-//    @RequestMapping("/")
-//    public String index(Model model) {
-//        model.addAttribute("mahasiswa", getAllMahasiswa());
-//        return "mahasiswa_page";
-//    }
-
-    @PostMapping("/addNewMahasiswa")
+    @PostMapping
     public ResponseEntity<MahasiswaEntity> addNewMahasiswa(@RequestBody MahasiswaEntity param) {
         MahasiswaEntity mahasiswa = mahasiswaService.addNew(param);
         return new ResponseEntity<>(mahasiswa, HttpStatus.CREATED);
     }
 
-    @GetMapping("/getAllMahasiswa")
+    @GetMapping
     public List<MahasiswaEntity> getAllMahasiswa() {
         return mahasiswaService.getAllMahasiswa();
     }
 
-    @PostMapping("/updateMahasiswa")
-    public ResponseEntity<MahasiswaEntity> updateMahasiswa(@RequestBody MahasiswaEntity param) {
-        MahasiswaEntity mahasiswa = mahasiswaService.updateMahasiswa(param);
-        return new ResponseEntity<>(mahasiswa, HttpStatus.OK);
+    @PutMapping("/{id}")
+    public ResponseEntity<MahasiswaEntity> updateMahasiswa(@PathVariable("id") int id,
+                                                           @RequestBody MahasiswaEntity param) {
+        MahasiswaEntity mahasiswa = mahasiswaService.findMahasiswaById(id);
+        mahasiswa.setMahasiswaNIM(param.getMahasiswaNIM());
+        mahasiswa.setMahasiswaName(param.getMahasiswaName());
+        mahasiswa.setMahasiswaJurusan(param.getMahasiswaJurusan());
+        mahasiswa.setMahasiswaFakultas(param.getMahasiswaFakultas());
+        mahasiswa.setPassword(param.getPassword());
+        MahasiswaEntity edit = mahasiswaService.updateMahasiswa(mahasiswa);
+        return new ResponseEntity<>(edit, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteMahasiswa")
-    public String deleteMahasiswaById(@RequestParam int id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<MahasiswaEntity> deleteMahasiswaById(@PathVariable("id") int id) {
+        MahasiswaEntity mahasiswa = mahasiswaService.findMahasiswaById(id);
         mahasiswaService.deleteMahasiswaById(id);
-        return "Delete Mahasiswa id: "+id+" Success";
+        return new ResponseEntity<>(mahasiswa, HttpStatus.OK);
     }
 }

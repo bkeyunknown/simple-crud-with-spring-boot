@@ -32,4 +32,9 @@ public class MahasiswaServiceImpl implements MahasiswaService {
     public void deleteMahasiswaById(int id) {
         mahasiswaRepository.deleteById(id);
     }
+
+    @Override
+    public MahasiswaEntity findMahasiswaById(int id) {
+        return mahasiswaRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 }
