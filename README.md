@@ -6,7 +6,7 @@
 - Mata Kuliah
 
 # How to run
-1. Clone repository ```git clone https://github.com/bkeyunknown/spring_data_mahasiswa.git```
+1. Clone repository ```git clone https://github.com/bkeyunknown/simple_crud_with_spring_boot.git```
 2. Start Spring Boot ```mvn spring-boot:run```
 3. Enjoy
 
