@@ -7,8 +7,9 @@
 
 # How to run
 1. Clone repository ```git clone https://github.com/bkeyunknown/simple_crud_with_spring_boot.git```
-2. Start Spring Boot ```mvn spring-boot:run``` (already installed maven)
-3. Enjoy
+2. Make a change to database configuration in ```application.properties``` (src/main/resources/)
+3. Start Spring Boot ```mvn spring-boot:run``` (already installed maven)
+4. Enjoy
 
 # Documentation
 - API Documentation with Postman
