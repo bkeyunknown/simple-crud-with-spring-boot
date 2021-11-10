@@ -5,8 +5,6 @@ import com.app.kuliah.dataMahasiswa.services.matkul.MatkulService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,33 +16,33 @@ public class MatkulControllers {
     @Autowired
     MatkulService matkulService;
 
-//    @RequestMapping("/")
-//    public String index(Model model) {
-//        model.addAttribute("matkul", getAllMatkul());
-//        return "matkul_page";
-//    }
-
-    @PostMapping("/addNewMatkul")
+    @PostMapping
     public ResponseEntity<MatkulEntity> addNewMatkul(@RequestBody MatkulEntity param) {
         MatkulEntity matkul = matkulService.addNew(param);
         return new ResponseEntity<>(matkul, HttpStatus.CREATED);
     }
 
-    @GetMapping("/getAllMatkul")
+    @GetMapping
     public List<MatkulEntity> getAllMatkul() {
         return matkulService.getAllMatkul();
     }
 
-    @PostMapping("/updateMatkul")
-    public ResponseEntity<MatkulEntity> updateMatkul(@RequestBody MatkulEntity param) {
-        MatkulEntity matkul = matkulService.updateMatkul(param);
-        return new ResponseEntity<>(matkul, HttpStatus.OK);
+    @PutMapping("/{id}")
+    public ResponseEntity<MatkulEntity> updateMatkul(@PathVariable("id") int id,
+                                                     @RequestBody MatkulEntity param) {
+        MatkulEntity matkul = matkulService.findMatkulById(id);
+        matkul.setMatkulName(param.getMatkulName());
+        matkul.setMatkulSks(param.getMatkulSks());
+        matkul.setMatkulSemester(param.getMatkulSemester());
+        MatkulEntity edit = matkulService.updateMatkul(matkul);
+        return new ResponseEntity<>(edit, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteMatkul")
-    public String deleteMatkulById(@RequestParam int id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<MatkulEntity> deleteMatkulById(@PathVariable("id") int id) {
+        MatkulEntity matkul = matkulService.findMatkulById(id);
         matkulService.deleteMatkulById(id);
-        return "Delete Matkul id: "+id+" Success";
+        return new ResponseEntity<>(matkul, HttpStatus.OK);
     }
 
 }

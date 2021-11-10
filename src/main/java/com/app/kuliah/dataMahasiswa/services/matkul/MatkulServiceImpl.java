@@ -32,4 +32,9 @@ public class MatkulServiceImpl implements MatkulService{
     public void deleteMatkulById(int id) {
         matkulRepository.deleteById(id);
     }
+
+    @Override
+    public MatkulEntity findMatkulById(int id) {
+        return matkulRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 }

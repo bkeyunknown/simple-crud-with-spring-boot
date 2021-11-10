@@ -15,4 +15,6 @@ public interface MatkulService {
     MatkulEntity updateMatkul(MatkulEntity param);
 
     void deleteMatkulById(int id);
+
+    MatkulEntity findMatkulById(int id);
 }
