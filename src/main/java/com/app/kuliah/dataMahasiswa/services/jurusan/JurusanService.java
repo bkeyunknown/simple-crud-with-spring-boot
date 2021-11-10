@@ -15,4 +15,6 @@ public interface JurusanService {
     JurusanEntity updateJurusan(JurusanEntity param);
 
     void deleteJurusanById(int id);
+
+    JurusanEntity findJurusanById(int id);
 }

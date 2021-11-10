@@ -32,4 +32,9 @@ public class JurusanServiceImpl implements JurusanService{
     public void deleteJurusanById(int id) {
         jurusanRepository.deleteById(id);
     }
+
+    @Override
+    public JurusanEntity findJurusanById(int id) {
+        return jurusanRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 }

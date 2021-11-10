@@ -40,7 +40,6 @@ public class FakultasControllers {
     public ResponseEntity<FakultasEntity> deleteFakultasById(@PathVariable("id") int id) {
         FakultasEntity deleteFakultas = fakultasService.findFakultasById(id);
         fakultasService.deleteFakultasById(id);
-//        return "Delete Fakultas id: "+id+" Success";
         return new ResponseEntity<>(deleteFakultas, HttpStatus.OK);
     }
 }
